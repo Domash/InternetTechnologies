@@ -1,6 +1,7 @@
 #include <boost/thread.hpp>
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
+
 #include <iostream>
 
 #include "ChatMessage.h"
@@ -20,10 +21,11 @@ public:
         udp::resolver::iterator iterator = resolver.resolve(query);
         endpoint_ = *iterator;
         boost::asio::connect(socket_, iterator);
+
+        handleConnect();
     }
 
     void send(const ChatMessage& msg) {
-        std::cout << "SEND" << std::endl;
         socket_.send(boost::asio::buffer(msg.data(), msg.size()));
     }
 
@@ -34,7 +36,8 @@ public:
 private:
 
     void handleConnect() {
-
+//        ChatMessage initial(std::string("/join HELLO"));
+//        socket_.send(boost::asio::buffer(initial.data(), initial.size()));
     }
 
     void startReceive() {

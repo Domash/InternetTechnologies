@@ -1,5 +1,6 @@
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/array.hpp>
+
 #include <algorithm>
 #include <string>
 
@@ -9,6 +10,15 @@ enum class MessageType {
     MESSAGE = 2,
     UNKNOWN = 3
 };
+
+std::string to_string(MessageType type) {
+    switch (type) {
+        case MessageType::JOINED: return "JOINED";
+        case MessageType::COMMAND: return "COMMAND";
+        case MessageType::MESSAGE: return "MESSAGE";
+        default: return "UNKNOWN";
+    }
+}
 
 class ChatMessage {
 public:
@@ -23,6 +33,30 @@ public:
 
     ChatMessage(const std::string& text) : data_() {
         initMessage(text);
+    }
+
+    boost::array<char, MESSAGE_LENGTH>& data() {
+        return data_;
+    }
+
+    boost::array<char, MESSAGE_LENGTH> data() const {
+        return data_;
+    }
+
+    MessageType type() {
+        return type_;
+    }
+
+    std::string text() const {
+        if(type_ == MessageType::UNKNOWN) {
+            return "UNKNOWN MESSAGE";
+        }
+        const auto position = std::find(data_.begin() + 1, data_.end(), 0);
+        return std::string(data_.begin() + 1, position);
+    }
+
+    std::size_t size() const {
+        return data_.size();
     }
 
     void decode() {
@@ -42,44 +76,21 @@ public:
         }
     }
 
-    MessageType type() {
-        return type_;
-    }
-
-    boost::array<char, MESSAGE_LENGTH>& data() {
-        return data_;
-    }
-
-    boost::array<char, MESSAGE_LENGTH> data() const {
-        return data_;
-    }
-
-    std::string text() const {
-        if(type_ == MessageType::UNKNOWN) {
-            throw std::invalid_argument("MessageType = UNKNOWN");
-        }
-        const auto position = std::find(data_.begin() + 1, data_.end(), 0);
-        return std::string(data_.begin() + 1, position);
-    }
-
-    std::size_t size() const {
-        return data_.size();
-    }
-
 private:
 
     void initMessage(const std::string& text) {
         if (text.empty()) {
             type_ = MessageType::UNKNOWN;
-        } else if(boost::starts_with(text, "/join")) {
+        } else if(boost::algorithm::istarts_with(text, "/join")) {
             type_ = MessageType::JOINED;
-        } else if(boost::starts_with(text, "/")) {
+        } else if(boost::algorithm::istarts_with(text, "/")) {
             type_ = MessageType::COMMAND;
         } else {
             type_ = MessageType::MESSAGE;
         }
+
         data_[0] = static_cast<char>(type_);
-        std::copy(text.begin(), text.end(), data_.begin() + 1);
+        memcpy(data_.data() + 1, text.data(), sizeof(char) * std::min(MESSAGE_LENGTH - 1, text.size()));
     }
 
     MessageType type_;
