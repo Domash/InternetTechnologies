@@ -25,7 +25,6 @@ public:
     void send(const ChatMessage& msg) {
         std::cout << "SEND" << std::endl;
         socket_.send(boost::asio::buffer(msg.data(), msg.size()));
-        //socket_.send_to(boost::asio::buffer(msg.data(), msg.size()), endpoint_);
     }
 
     ~Client() {
@@ -34,9 +33,38 @@ public:
 
 private:
 
+    void handleConnect() {
+
+    }
+
+    void startReceive() {
+        socket_.async_receive_from(
+            boost::asio::buffer(message_.data()),
+            endpoint_,
+            boost::bind(
+                &Client::handleReceive,
+                this,
+                boost::asio::placeholders::error,
+                boost::asio::placeholders::bytes_transferred
+            )
+        );
+    }
+
+    void handleReceive(
+        const boost::system::error_code& error,
+        std::size_t bytes_transferred
+    ) {
+        if(!error) {
+            std::cout << message_.text() << std::endl;
+        }
+        startReceive();
+    }
+
     udp::socket socket_;
     udp::endpoint endpoint_;
     boost::asio::io_service& io_service_;
+
+    ChatMessage message_;
 
 };
 
@@ -56,7 +84,7 @@ int main(int argc, char* argv[]) {
 
         std::string input;
         while(std::getline(std::cin, input)) {
-            ChatMessage msg(std::move(input));
+            ChatMessage msg(input);
             client.send(msg);
         }
 

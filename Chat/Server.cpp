@@ -93,7 +93,6 @@ private:
     udp::endpoint remote_endpoint_;
     boost::asio::io_service& io_service_;
 
-
 };
 
 int main(int argc, char* argv[]) {
