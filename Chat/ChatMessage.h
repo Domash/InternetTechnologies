@@ -1,4 +1,6 @@
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/array.hpp>
+#include <algorithm>
 #include <string>
 
 enum class MessageType {
@@ -16,11 +18,11 @@ public:
     ChatMessage() : data_(), type_(MessageType::UNKNOWN) {}
 
     ChatMessage(std::string& text) : data_() {
-        init(text);
+        initMessage(text);
     }
 
     ChatMessage(const std::string& text) : data_() {
-        init(text);
+        initMessage(text);
     }
 
     void decode() {
@@ -53,6 +55,9 @@ public:
     }
 
     std::string text() const {
+        if(type_ == MessageType::UNKNOWN) {
+            throw std::invalid_argument("MessageType = UNKNOWN");
+        }
         const auto position = std::find(data_.begin() + 1, data_.end(), 0);
         return std::string(data_.begin() + 1, position);
     }
@@ -63,16 +68,18 @@ public:
 
 private:
 
-    void static init(const std::string& text) {
+    void initMessage(const std::string& text) {
         if (text.empty()) {
-
-        } else if(text.starts_with("/join")) {
-
-        } else if(text.starts_with('/')) {
-
+            type_ = MessageType::UNKNOWN;
+        } else if(boost::starts_with(text, "/join")) {
+            type_ = MessageType::JOINED;
+        } else if(boost::starts_with(text, "/")) {
+            type_ = MessageType::COMMAND;
         } else {
-
+            type_ = MessageType::MESSAGE;
         }
+        data_[0] = static_cast<char>(type_);
+        std::copy(text.begin(), text.end(), data_.begin() + 1);
     }
 
     MessageType type_;
