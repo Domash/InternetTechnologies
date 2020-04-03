@@ -15,7 +15,7 @@ if(Boost_FOUND)
 
 endif()
 
-add_executable(Client Client.cpp ChatMessage.h Colors.h)
+add_executable(Client Client.cpp ChatMessage.h Colors.h User.h Room.h Session.h)
 add_executable(Server Server.cpp ChatMessage.h)
 
 if(Boost_FOUND)

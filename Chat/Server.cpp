@@ -6,8 +6,8 @@
 #include <unordered_map>
 #include <iostream>
 
-#include "Colors.h"
 #include "ChatMessage.h"
+#include "Colors.h"
 
 using namespace colors;
 
@@ -43,9 +43,24 @@ private:
         std::size_t bytes_transferred
     ) {
 
-        chat_message_.decode();
+        if(!error || error == boost::asio::error::message_size) {
+            chat_message_.decode();
 
-        std::cout << to_string(chat_message_.type()) << std::endl;
+            switch (chat_message_.type()) {
+                case MessageType::JOINED:
+                    handleJoin();
+                    break;
+                case MessageType::COMMAND:
+                    handleCommand();
+                    break;
+                case MessageType::MESSAGE:
+                    handleMessage();
+                    break;
+                default:
+                    break;
+            }
+
+        }
 
 //        if(.type() == MessageType::JOINED) {
 //            std::cout << BOLD(FGRN("New connection from ")) << remote_endpoint_ << std::endl;
@@ -66,6 +81,19 @@ private:
 
         startReceive();
     }
+
+    void handleJoin() {
+
+    }
+
+    void handleCommand() {
+
+    }
+
+    void handleMessage() {
+
+    }
+
 
     void handleSend(
         boost::shared_ptr<std::string> message,

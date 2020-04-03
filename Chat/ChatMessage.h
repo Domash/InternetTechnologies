@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <string>
+#include <deque>
 
 enum class MessageType {
     JOINED  = 0,
@@ -97,3 +98,5 @@ private:
     boost::array<char, MESSAGE_LENGTH> data_;
 
 };
+
+typedef std::deque<ChatMessage> MessageQueue;
