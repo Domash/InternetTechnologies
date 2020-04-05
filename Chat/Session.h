@@ -16,18 +16,23 @@ public:
     Session(
         boost::asio::ip::udp::socket& socket,
         boost::asio::ip::udp::endpoint& remote_endpoint,
-        Room& room
-    ) : socket_(socket), remote_endpoint_(remote_endpoint), room_(room) {}
+        std::string username
+    ) : User(std::move(username)), socket_(socket), remote_endpoint_(remote_endpoint) {}
 
     void deliver(const ChatMessage& message) override {
 
     }
 
+    boost::shared_ptr<Room> room() const {
+        return room_;
+    }
+
+
 private:
 
     MessageQueue message_queue_;
 
-    Room& room_;
+    boost::shared_ptr<Room> room_;
     boost::asio::ip::udp::socket& socket_;
     boost::asio::ip::udp::endpoint remote_endpoint_;
 

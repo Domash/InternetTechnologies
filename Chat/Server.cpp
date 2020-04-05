@@ -5,8 +5,9 @@
 
 #include <unordered_map>
 #include <iostream>
+#include <map>
 
-#include "ChatMessage.h"
+#include "Session.h"
 #include "Colors.h"
 
 using namespace colors;
@@ -83,7 +84,20 @@ private:
     }
 
     void handleJoin() {
-
+        std::vector<std::string> words = chat_message_.splitted_text();
+        if(words.size() == 2) {
+            std::string username = words[1];
+            if(users_.find(remote_endpoint_) != users_.end()) {
+                Session session(socket_, remote_endpoint_, "SERVER");
+                session.deliver(ChatMessage("Login is already exists."));
+            } else {
+                users_[remote_endpoint_] = boost::make_shared<Session>(socket_, remote_endpoint_, username);
+                users_[remote_endpoint_] -> deliver(ChatMessage("Welcome to chat."));
+            }
+        } else {
+            Session session(socket_, remote_endpoint_, "SERVER");
+            session.deliver(ChatMessage("Invalid command form."));
+        }
     }
 
     void handleCommand() {
@@ -91,7 +105,13 @@ private:
     }
 
     void handleMessage() {
+        const auto session = users_[remote_endpoint_];
+        const auto room = session -> room();
 
+        if(room) {
+            // PREPARE MESSAGE
+            room -> deliver(ChatMessage("[" + session -> username() + "]: " + chat_message_.text()));
+        }
     }
 
 
@@ -103,8 +123,10 @@ private:
         //std::cout << *(message.get()) << std::endl;
     }
 
-    // std::unordered_map<>;
     ChatMessage chat_message_;
+
+    std::unordered_map<std::string, Room> rooms_;
+    std::map<udp::endpoint, boost::shared_ptr<Session>> users_;
 
     udp::socket socket_;
     udp::endpoint remote_endpoint_;

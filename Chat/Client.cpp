@@ -36,8 +36,8 @@ public:
 private:
 
     void handleConnect() {
-        ChatMessage initial(std::string("/join HELLO"));
-        socket_.send(boost::asio::buffer(initial.data(), initial.size()));
+        //ChatMessage initial(std::string("/join HELLO"));
+        //socket_.send(boost::asio::buffer(initial.data(), initial.size()));
     }
 
     void startReceive() {

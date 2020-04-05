@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <string>
+#include <vector>
 #include <deque>
 
 enum class MessageType {
@@ -54,6 +55,13 @@ public:
         }
         const auto position = std::find(data_.begin() + 1, data_.end(), 0);
         return std::string(data_.begin() + 1, position);
+    }
+
+    std::vector<std::string> splitted_text(const std::string& delims = " ") const {
+        std::vector<std::string> words;
+        std::string text_ = text();
+        boost::split(words, text_, boost::is_any_of(delims));
+        return words;
     }
 
     std::size_t size() const {
