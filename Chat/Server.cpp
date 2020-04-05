@@ -43,7 +43,6 @@ private:
         const boost::system::error_code& error,
         std::size_t bytes_transferred
     ) {
-
         if(!error || error == boost::asio::error::message_size) {
             chat_message_.decode();
 
@@ -101,6 +100,21 @@ private:
     }
 
     void handleCommand() {
+        const auto session = users_[remote_endpoint_];
+        const std::string username = session -> username();
+        const std::string command  = chat_message_.text();
+
+        if(command == "/users_list") {
+            session -> deliver(ChatMessage(users_list(username)));
+        } else if(command == "/rooms_list") {
+            session -> deliver(ChatMessage(rooms_list()));
+        } else if(boost::algorithm::istarts_with(command, "/create_room")) {
+
+        } else if(boost::algorithm::istarts_with(command, "/join_room")) {
+
+        } else if(boost::algorithm::istarts_with(command, "/leave_room")) {
+
+        }
 
     }
 
@@ -114,7 +128,6 @@ private:
         }
     }
 
-
     void handleSend(
         boost::shared_ptr<std::string> message,
         const boost::system::error_code& error,
@@ -123,6 +136,41 @@ private:
         //std::cout << *(message.get()) << std::endl;
     }
 
+    std::string users_list(const std::string& username) {
+        std::string users;
+        std::for_each(begin(users_), end(users_), [&](const std::pair<udp::endpoint, boost::shared_ptr<Session>>& pair) {
+            const auto& [_, session] = pair;
+            const auto& username_ = session -> username();
+            if(username_ != username) {
+               users += username_ + '\n';
+           }
+        });
+        return users;
+    }
+
+    std::string rooms_list() {
+        std::string rooms;
+        std::for_each(begin(rooms_), end(rooms_), [&](const std::pair<std::string, Room>& pair) {
+            const auto& [room_name, room] = pair;
+            if(room.is_public()) {
+                rooms += room_name + '\n';
+            }
+        });
+        return rooms;
+    }
+
+    bool create_room(const std::string& username) {
+
+    }
+
+    std::pair<bool, std::string> join_room(const std::string& username) {
+
+    }
+
+    bool exit_room() {
+
+    }
+    
     ChatMessage chat_message_;
 
     std::unordered_map<std::string, Room> rooms_;

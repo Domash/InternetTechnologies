@@ -31,6 +31,10 @@ public:
         return name_;
     }
 
+    bool is_public() const {
+        return false;
+    }
+
 
 private:
 
