@@ -23,6 +23,7 @@ public:
         boost::asio::connect(socket_, iterator);
 
         handleConnect();
+        startReceive();
     }
 
     void send(const ChatMessage& msg) {
@@ -58,6 +59,7 @@ private:
         std::size_t bytes_transferred
     ) {
         if(!error) {
+            message_.decode();
             std::cout << message_.text() << std::endl;
         }
         startReceive();

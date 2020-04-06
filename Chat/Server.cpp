@@ -90,7 +90,6 @@ private:
         const std::string command  = chat_message_.text();
 
         if(command == "/users_list") {
-            std::cout << "GET users list" << std::endl;
             session -> deliver(ChatMessage(users_list(username)));
         } else if(command == "/rooms_list") {
             session -> deliver(ChatMessage(rooms_list()));
