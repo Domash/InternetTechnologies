@@ -20,11 +20,15 @@ public:
     ) : User(std::move(username)), socket_(socket), remote_endpoint_(remote_endpoint) {}
 
     void deliver(const ChatMessage& message) override {
-
+        std::cout << message.text() << std::endl;
     }
 
     boost::shared_ptr<Room> room() const {
         return room_;
+    }
+
+    void set_room(const boost::shared_ptr<Room>& room) {
+        room_ = room;
     }
 
 

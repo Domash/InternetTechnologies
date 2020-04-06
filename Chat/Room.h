@@ -35,6 +35,9 @@ public:
         return false;
     }
 
+    bool is_password_valid(const std::string& password) const {
+        return password == password_;
+    }
 
 private:
 

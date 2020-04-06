@@ -1,7 +1,3 @@
-//
-// Created by Денис Домашевич on 4/2/20.
-//
-
 #ifndef CHAT_COLORS_H
 #define CHAT_COLORS_H
 

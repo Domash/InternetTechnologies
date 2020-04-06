@@ -46,6 +46,8 @@ private:
         if(!error || error == boost::asio::error::message_size) {
             chat_message_.decode();
 
+            std::cout << to_string(chat_message_.type()) << std::endl;
+
             switch (chat_message_.type()) {
                 case MessageType::JOINED:
                     handleJoin();
@@ -62,30 +64,13 @@ private:
 
         }
 
-//        if(.type() == MessageType::JOINED) {
-//            std::cout << BOLD(FGRN("New connection from ")) << remote_endpoint_ << std::endl;
-//        }
-
-        //socket_.send_to(boost::asio::buffer(data_), remote_endpoint_);
-        //socket_.send(boost::asio::buffer(data_), remote_endpoint_);
-        //std::cout << BOLD(FGRN("New connection from ")) << remote_endpoint_ << '\n';
-
-//        auto text = boost::make_shared<std::string>(chat_message_.data());
-//        socket_.async_send(boost::asio::buffer(*text), boost::bind(
-//                &Server::handleSend,
-//                this,
-//                text,
-//                boost::asio::placeholders::error,
-//                boost::asio::placeholders::bytes_transferred
-//        ));
-
         startReceive();
     }
 
     void handleJoin() {
-        std::vector<std::string> words = chat_message_.splitted_text();
-        if(words.size() == 2) {
-            std::string username = words[1];
+        std::vector<std::string> splitted_message = chat_message_.splitted_text();
+        if(splitted_message.size() == 2) {
+            std::string username = splitted_message[1];
             if(users_.find(remote_endpoint_) != users_.end()) {
                 Session session(socket_, remote_endpoint_, "SERVER");
                 session.deliver(ChatMessage("Login is already exists."));
@@ -105,6 +90,7 @@ private:
         const std::string command  = chat_message_.text();
 
         if(command == "/users_list") {
+            std::cout << "GET users list" << std::endl;
             session -> deliver(ChatMessage(users_list(username)));
         } else if(command == "/rooms_list") {
             session -> deliver(ChatMessage(rooms_list()));
@@ -128,16 +114,8 @@ private:
         }
     }
 
-    void handleSend(
-        boost::shared_ptr<std::string> message,
-        const boost::system::error_code& error,
-        std::size_t bytes_transferred
-    ) {
-        //std::cout << *(message.get()) << std::endl;
-    }
-
     std::string users_list(const std::string& username) {
-        std::string users;
+        std::string users = "Users number: " + std::to_string(users_.size()) + "\n";
         std::for_each(begin(users_), end(users_), [&](const std::pair<udp::endpoint, boost::shared_ptr<Session>>& pair) {
             const auto& [_, session] = pair;
             const auto& username_ = session -> username();
@@ -150,31 +128,70 @@ private:
 
     std::string rooms_list() {
         std::string rooms;
-        std::for_each(begin(rooms_), end(rooms_), [&](const std::pair<std::string, Room>& pair) {
+        std::for_each(begin(rooms_), end(rooms_), [&](const std::pair<std::string, boost::shared_ptr<Room>>& pair) {
             const auto& [room_name, room] = pair;
-            if(room.is_public()) {
+            if(room -> is_public()) {
                 rooms += room_name + '\n';
             }
         });
         return rooms;
     }
 
-    bool create_room(const std::string& username) {
+    std::pair<bool, std::string> create_room(const std::string& username) {
+        std::vector<std::string> splitted_message = chat_message_.splitted_text();
 
+        if(splitted_message.size() != 3) {
+            return {0, "Bad command"};
+        }
+
+        const std::string room_name = splitted_message[1];
+        const std::string room_password = splitted_message[2];
+
+        if(rooms_.count(room_name)) {
+            return {0, "Room with name = [" + room_name + "] already exists."};
+        }
+
+        rooms_[room_name] = boost::make_shared<Room>(room_name, room_password);
+
+        return {1, "OK"};
     }
 
     std::pair<bool, std::string> join_room(const std::string& username) {
+        std::vector<std::string> splitted_message = chat_message_.splitted_text();
 
+        if(splitted_message.size() != 3) {
+            return {0, "Bad command"};
+        }
+
+        const std::string room_name = splitted_message[1];
+        const std::string room_password = splitted_message[2];
+
+        const auto room_iterator = rooms_.find(room_name);
+
+        if(room_iterator == rooms_.end()) {
+            return {0, "Wrong room name"};
+        }
+
+        const auto room = room_iterator -> second;
+
+        if(!room -> is_password_valid(room_password)) {
+            return {0, "Wrong password"};
+        }
+
+        room -> join(users_[remote_endpoint_]);
+        users_[remote_endpoint_] -> set_room(room);
+
+        return {1, "OK"};
     }
 
     bool exit_room() {
 
     }
-    
+
     ChatMessage chat_message_;
 
-    std::unordered_map<std::string, Room> rooms_;
     std::map<udp::endpoint, boost::shared_ptr<Session>> users_;
+    std::unordered_map<std::string, boost::shared_ptr<Room>> rooms_;
 
     udp::socket socket_;
     udp::endpoint remote_endpoint_;
