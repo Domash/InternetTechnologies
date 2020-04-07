@@ -1,0 +1,4 @@
+#ifndef CHAT_STRINGS_H
+#define CHAT_STRINGS_H
+
+#endif //CHAT_STRINGS_H

@@ -1,5 +1,4 @@
 #include <boost/smart_ptr/make_shared.hpp>
-#include <boost/array.hpp>
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 
@@ -8,9 +7,7 @@
 #include <map>
 
 #include "Session.h"
-#include "Colors.h"
-
-using namespace colors;
+#include "ColorStreams.h"
 
 using boost::asio::ip::udp;
 
@@ -46,32 +43,40 @@ private:
         if(!error || error == boost::asio::error::message_size) {
             chat_message_.decode();
 
-            std::cout << to_string(chat_message_.type()) << std::endl;
+            std::cout << ansi::red << to_string(chat_message_.type()) << std::endl;
 
-            switch (chat_message_.type()) {
-                case MessageType::JOINED:
-                    handleJoin();
-                    break;
-                case MessageType::COMMAND:
-                    handleCommand();
-                    break;
-                case MessageType::MESSAGE:
-                    handleMessage();
-                    break;
-                default:
-                    break;
+            if(!users_.count(remote_endpoint_) && chat_message_.type() != MessageType::CONNECT) {
+                handleNonJoinedUser();
+            } else {
+                switch (chat_message_.type()) {
+                    case MessageType::CONNECT:
+                        handleConnect();
+                        break;
+                    case MessageType::COMMAND:
+                        handleCommand();
+                        break;
+                    case MessageType::MESSAGE:
+                        handleMessage();
+                        break;
+                    default:
+                        break;
+                }
             }
-
         }
 
         startReceive();
     }
 
-    void handleJoin() {
+    void handleNonJoinedUser() {
+        Session session(socket_, remote_endpoint_, "SERVER");
+        session.deliver(ChatMessage("Need connect to some room."));
+    }
+
+    void handleConnect() {
         std::vector<std::string> splitted_message = chat_message_.splitted_text();
         if(splitted_message.size() == 2) {
             std::string username = splitted_message[1];
-            if(users_.find(remote_endpoint_) != users_.end()) {
+            if(users_.count(remote_endpoint_)) {
                 Session session(socket_, remote_endpoint_, "SERVER");
                 session.deliver(ChatMessage("Login is already exists."));
             } else {
@@ -94,11 +99,11 @@ private:
         } else if(command == "/rooms_list") {
             session -> deliver(ChatMessage(rooms_list()));
         } else if(boost::algorithm::istarts_with(command, "/create_room")) {
-
+            const auto& [status, status_message] = create_room(username);
         } else if(boost::algorithm::istarts_with(command, "/join_room")) {
-
+            const auto& [status, status_message] = join_room(username);
         } else if(boost::algorithm::istarts_with(command, "/leave_room")) {
-
+            const auto& [status, status_message] = leave_room(username);
         }
 
     }
@@ -106,10 +111,11 @@ private:
     void handleMessage() {
         const auto session = users_[remote_endpoint_];
         const auto room = session -> room();
+        const auto username = session -> username();
 
         if(room) {
             // PREPARE MESSAGE
-            room -> deliver(ChatMessage("[" + session -> username() + "]: " + chat_message_.text()));
+            room -> deliver(ChatMessage("[" + session -> username() + "]: " + chat_message_.text()), username);
         }
     }
 
@@ -183,7 +189,7 @@ private:
         return {1, "OK"};
     }
 
-    bool exit_room() {
+    std::pair<bool, std::string> leave_room(const std::string& username) {
 
     }
 

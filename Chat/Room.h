@@ -19,11 +19,11 @@ public:
         users_.erase(user);
     }
 
-    void deliver(const ChatMessage& message) {
+    void deliver(const ChatMessage& message, const std::string& username) {
         message_queue_.push_back(message);
 
         std::for_each(users_.begin(), users_.end(), [&](const user_ptr& user) {
-            user -> deliver(message);
+            if(username != user -> username()) user -> deliver(message);
         });
     }
 

@@ -7,7 +7,7 @@
 #include <deque>
 
 enum class MessageType {
-    JOINED  = 0,
+    CONNECT = 0,
     COMMAND = 1,
     MESSAGE = 2,
     UNKNOWN = 3
@@ -15,7 +15,7 @@ enum class MessageType {
 
 std::string to_string(MessageType type) {
     switch (type) {
-        case MessageType::JOINED: return "JOINED";
+        case MessageType::CONNECT: return "CONNECT";
         case MessageType::COMMAND: return "COMMAND";
         case MessageType::MESSAGE: return "MESSAGE";
         default: return "UNKNOWN";
@@ -71,7 +71,7 @@ public:
     void decode() {
         switch (data_[0]) {
             case 0:
-                type_ = MessageType::JOINED;
+                type_ = MessageType::CONNECT;
                 break;
             case 1:
                 type_ = MessageType::COMMAND;
@@ -90,9 +90,9 @@ private:
     void initMessage(const std::string& text) {
         if (text.empty()) {
             type_ = MessageType::UNKNOWN;
-        } else if(boost::algorithm::istarts_with(text, "/join")) {
-            type_ = MessageType::JOINED;
-        } else if(boost::algorithm::istarts_with(text, "/")) {
+        } else if(boost::algorithm::starts_with(text, "/connect")) {
+            type_ = MessageType::CONNECT;
+        } else if(boost::algorithm::starts_with(text, "/")) {
             type_ = MessageType::COMMAND;
         } else {
             type_ = MessageType::MESSAGE;
