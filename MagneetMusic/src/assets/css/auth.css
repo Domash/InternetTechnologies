@@ -1,0 +1,80 @@
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 85.0vh;
+}
+
+body { 
+  margin: 0;
+  background-color: black;
+  background-size: 100%;
+  background-image: url(../images/background.png);
+  background-repeat: no-repeat;
+}
+
+form {
+  display: flex;  
+  justify-content: center;
+	align-items: center;
+  flex-direction: column;
+  width: 40%;
+  height: auto;
+  padding: 0%;
+  border: 4px solid;
+  border-color: #f020cd;
+  border-radius: 15px;	
+}
+
+form input {
+  font-size: 16px;
+  font-family: 'Times';
+	padding: 5px;
+	margin-top: 10px;
+  margin-bottom: 10px;
+  outline: none;
+  background-color: transparent;
+  border: transparent;
+  border-bottom: 4px solid #f020cd;
+
+}
+
+.div-flex-auth {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 3%;
+}
+
+.div-help-auth-text {
+  background: transparent;
+	font-family: '', sans-serif;
+	font-size: 15px;
+}
+
+.div-button-auth {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn-cyan {
+  font-size: medium;
+  color: black;
+  background: cyan;
+  border: transparent;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 8px 30px;
+  background-size: 0% 100%;
+}
+
+::placeholder {
+  color: whitesmoke;
+}
+
+input, select, textarea {
+  size: 4;
+  color: cyan;
+}
