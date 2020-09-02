@@ -1,0 +1,35 @@
+.nav-container {
+  padding: 30px 30px
+}
+
+.nav-container-nav {
+  position: sticky;
+  overflow: hidden;
+}
+
+.nav-container-nav a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-container-nav a:hover {
+  background-color: #ff8200;
+  color: black;
+}
+
+.nav-container-nav a.active {
+  background-color: #4CAF50;
+}
+
+.nav-ref {
+	transition: 0.25s;
+	padding-bottom: 10px;
+	text-transform: capitalize;
+	color: #555;
+	margin-right: 8%; 
+	border-bottom: 1px solid black;
+}

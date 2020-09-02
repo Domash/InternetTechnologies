@@ -1,0 +1,55 @@
+.header {
+	display: flex;
+	justify-content:space-between; 
+  box-shadow: 3px 3px 6px #bbb;
+  background-color: black;
+}
+
+.h-nav-container {
+  padding: 0px 20px
+}
+
+.h-nav-container-nav {
+  position: sticky;
+  overflow: hidden;
+}
+
+.h-nav-container-nav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.h-nav-container-nav a:hover {
+  background-color: #ff8200;
+  color: black;
+}
+
+.h-nav-container-nav a.active {
+  background-color: #4CAF50;
+}
+
+.h-nav-container-nav input[type=text] {
+  float: left;
+  padding: 4px;
+  border: none;
+  width: 400px;
+  margin-top: 10px;
+  margin-right: 16px;
+  margin-left: 20px;
+  font-size: 16px;
+  border-radius: 3px;
+}
+
+.h-nav-container-nav input[type=text]:focus {
+  outline: none;
+}
+
+.nav-container-nav input::placeholder {
+  color: var(--color3);
+  opacity: 1; 
+}
+

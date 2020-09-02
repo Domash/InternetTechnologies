@@ -4,55 +4,64 @@
   <title>Magneet Music</title>
   <meta charset="utf-8">
 
+  <link rel="stylesheet" type="text/css" href="../assets/css/baseSettings.css">
   <link rel="stylesheet" type="text/css" href="../assets/css/audioPlayer.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/navigation.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/headerNavigation.css">
 
 </head>
 
 <body>
-  <header class="">
-    <div id="">
-      <a class="header-button" href="">Home</a>
-      <a class="header-button" href="">Library</a>
-      <input id="header-search" size="" placeholder="Search Track">
-
-      <div id="">
-        <a class="header-button" href="">Login</a>
-        <a class="header-button" href="">Register</a>
+  <header class="header">
+    <nav class="h-nav-container">
+      <div class="h-nav-container-nav">
+        <a class="h-nav-ref" href="">Home</a>
+        <a class="h-nav-ref" href="">Library</a>
+        <input type="text" placeholder="Search...">
       </div>
-    </div>
+    </nav>
   </header>
-    <main id="">
-      <nav class="">
-        <div id="">
-          <a class="" href="">Overview</a>
-          <a class="" href="">Albums</a>
-          <a class="" href="">Playlists</a>
-          <a class="" href="">Likes</a>
-        </div>
-      </nav>
-      
-      <!-- Albums -->
-      <section class="">
-        <div class="">
-          <h3>Albums</h3>
-        </div>
-      </section> 
 
-      <!-- Playlists -->
-      <section class="">
-        <div class="">
-          <h3>Playlists</h3>
-        </div>
-      </section>
+  <main id="main-container">
+    <nav class="nav-container">
+      <div class="nav-container-nav">
+        <a class="nav-ref" href="">Overview</a>
+        <a class="nav-ref" href="">Albums</a>
+        <a class="nav-ref" href="">Playlists</a>
+        <a class="nav-ref" href="">Likes</a>
+        <a class="nav-ref" href="">Following</a>
+      </div>
+    </nav>
+    
+    <!-- Albums -->
+    <section class="albums-section">
+      <h3>Albums</h3>
+      <div class="cover-section-div">
+        <ul class="cover-list">
+          <li class="cover-list-item">
+            <div class="cover-div">
+              
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section> 
 
-      <!-- Likes -->
-      <section class="">
-        <div class="">
-          <h3>Likes</h3>
-        </div>
-      </section>
+    <!-- Playlists -->
+    <section class="playlists-section">
+      <h3>Playlists</h3>
+      <div class="">
+      </div>
+    </section>
 
-    </main>
+    <!-- Likes -->
+    <section class="likes-section">
+      <h3>Likes</h3>
+      <div class="">
+      </div>
+    </section>
+
+  </main>
 
     <!-- Player -->
     <section class="player-section">
