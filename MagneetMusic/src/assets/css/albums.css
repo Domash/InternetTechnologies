@@ -1,0 +1,29 @@
+.cover-section-div {
+	position: relative;
+}
+
+.cover-list {
+  display: flex;
+	flex-wrap: wrap;		
+	justify-content: flex-start;
+}
+
+.cover-list-item {
+	margin-right: 10px;
+	margin-bottom: 5px;
+	padding: 10px 10px 20px 10px;
+	list-style-type: none;
+}
+
+.cover-div {
+  position: relative;
+}
+
+.cover-image {
+	height: 13em;
+	width: 13em;	
+}
+
+.cover-image:hover {
+	opacity: 0.5;
+}
