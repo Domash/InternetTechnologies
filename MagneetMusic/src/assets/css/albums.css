@@ -24,6 +24,25 @@
 	width: 13em;	
 }
 
-.cover-image:hover {
+.play-image-div {
+	transition: .5s ease;
+}
+
+.play-image {
+  opacity: 0;
+	position: absolute;
+	height: 5em;
+	width: 5em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.cover-div:hover .cover-image {
 	opacity: 0.5;
+}
+
+.cover-div:hover .play-image {
+	opacity: 1;
 }
