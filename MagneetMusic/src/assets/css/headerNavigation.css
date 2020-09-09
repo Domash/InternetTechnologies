@@ -24,12 +24,15 @@
 }
 
 .h-nav-container-nav a:hover {
-  background-color: #ff8200;
+  background-color: orchid;
   color: black;
 }
 
-.h-nav-container-nav a.active {
-  background-color: #4CAF50;
+.h-nav-ref {
+  font-family: monospace;
+  font-size: 1em;
+  color: orchid;
+  text-decoration: none;
 }
 
 .h-nav-container-nav input[type=text] {
@@ -41,15 +44,11 @@
   margin-right: 16px;
   margin-left: 20px;
   font-size: 16px;
+  font-family: monospace;
   border-radius: 3px;
 }
 
 .h-nav-container-nav input[type=text]:focus {
   outline: none;
-}
-
-.nav-container-nav input::placeholder {
-  color: var(--color3);
-  opacity: 1; 
 }
 
