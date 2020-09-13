@@ -46,3 +46,10 @@
 .cover-div:hover .play-image {
 	opacity: 1;
 }
+/* 
+@media only screen and (max-width: 1024px) {
+	.cover-list {
+			overflow: scroll;
+			scrollbar-width: none;
+	}
+} */

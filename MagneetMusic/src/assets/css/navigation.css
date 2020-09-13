@@ -18,8 +18,8 @@
 }
 
 .nav-container-nav a:hover {
-  background-color: orchid;
-  color: black;
+  color: orchid;
+  border-bottom: 1px solid orchid;
 }
 
 .nav-container-nav a.active {
