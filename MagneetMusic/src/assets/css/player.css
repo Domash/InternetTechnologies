@@ -1,7 +1,8 @@
 .player-section {
-  background: whitesmoke;
+  background: red;
   color: #000;
   min-height: 60px;
+  width: 100%;
   /* max-height: 80px; */
   display: flex;
   flex-direction: row;

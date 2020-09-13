@@ -46,10 +46,19 @@
 .cover-div:hover .play-image {
 	opacity: 1;
 }
-/* 
+
 @media only screen and (max-width: 1024px) {
-	.cover-list {
-			overflow: scroll;
-			scrollbar-width: none;
+
+	.cover-section-div {
+		/* border: 1px solid orchid; */
 	}
-} */
+
+	.cover-list {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+	}
+
+	.cover-list-item {
+		flex: 0 0 auto;
+	}
+}
