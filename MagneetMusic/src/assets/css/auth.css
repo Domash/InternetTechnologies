@@ -65,6 +65,7 @@ form input {
   margin-top: 10px;
   margin-bottom: 20px;
   padding: 8px 30px;
+  border: none;
   background-size: 0% 100%;
 }
 
