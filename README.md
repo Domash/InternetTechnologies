@@ -4,7 +4,7 @@
 
 ### Student: Domashevich Denis, 753503
 
- -[Index](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/registration.html)
- -[Registration](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/registration.html)
- -[Authorization](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/authorization.html)
- -[Almub Page](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/albumPage.html)
+ - [Index](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/registration.html)
+ - [Registration](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/registration.html)
+ - [Authorization](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/authorization.html)
+ - [Almub Page](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/albumPage.html)
