@@ -1,6 +1,7 @@
 let RegisterPage = {
   render: async () => {
     let view = `
+    <section class="auth-section">
       <form class="log-form">
         <div>
           <div class="div-flex-auth">
@@ -19,6 +20,7 @@ let RegisterPage = {
           </div>
         </div>
       </form>
+    </section>
     `
     return view;
   },

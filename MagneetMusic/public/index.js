@@ -17,10 +17,13 @@ const routes = {
 
 const router = async () => {
   const header = null || document.getElementById('header-content');
-  const main_content = null || document.getElementById("main-content");
+  const main_content = null || document.getElementById('main-content');
 
   header.innerHTML = await Header.render();
   await Header.after_render();
+
+  main_content.innerHTML = await Home.render();
+  await Home.after_render();
 
   let request = Utils.parseRequestURL()
 

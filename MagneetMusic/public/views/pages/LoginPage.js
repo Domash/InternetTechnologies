@@ -1,6 +1,7 @@
 let LoginPage = {
   render: async () => {
     let view = `
+    <section class="auth-section">
       <form class="log-form">
         <div>
           <div class="div-flex-auth">
@@ -16,10 +17,12 @@ let LoginPage = {
           </div>
         </div>
       </form>
+    </section>
     `
     return view;
   },
   after_render: async () => {
+
     const login_button = document.getElementById("login_button");
 
     login_button.addEventListener ("click", () => {
