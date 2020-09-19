@@ -1,0 +1,42 @@
+.div-header-buttons {
+	display: flex;
+	justify-content: center;
+	margin: 3px 3px;
+	padding: 10px 30px;
+	border-radius: 5px;
+  border: 2px solid;
+  width: 50px;
+	font-family: monospace;
+	font-size: 14px;
+	text-transform: capitalize;
+	background: none;
+	outline: none;
+	cursor: pointer;
+	-webkit-transition: all .5s;
+	transition: all .5s;
+  color: #f020cd;
+
+	background-size: 0% 100%;
+} 
+
+@media only screen and (max-width: 1024px) {
+	.div-header-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 3px 3px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: 2px solid;
+    font-family: monospace;
+    font-size: 9px;
+    text-transform: capitalize;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    color: #f020cd;
+
+    background-size: 0% 100%;
+  } 
+}

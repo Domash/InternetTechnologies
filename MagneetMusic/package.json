@@ -1,0 +1,14 @@
+{
+  "name": "magneetmusic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Denis Domashevich",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^7.21.0"
+  }
+}
