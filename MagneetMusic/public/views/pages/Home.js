@@ -1,3 +1,5 @@
+import * as DatabaseHelper from '../../tools/DatabaseHelper.js'
+
 let Home = {
   render: async () => {
     let view = `
@@ -11,6 +13,25 @@ let Home = {
       </div>
     </nav>
     
+    <section class="albums-section">
+      <h3 class="section-title">Albums</h3>
+      <div class="cover-section-div">
+        <ul id="cover-list-id" class="cover-list">
+          <li class="cover-list-item">
+            <div class="cover-div">
+              <a href="#">
+                <img class="cover-image" src="../assets/images/cover-image.png">
+                <div class="play-image-div">
+                  <img class="play-image" src="../assets/images/play_image.png"/>
+                </div>
+              </a>
+            </div>
+            <a class="section-album-text" href="">Album name</a>
+            <p class="section-author-text" href="">Author name</p>
+          </li>
+        </ul>
+        </div>
+      </section> 
     `;
     return view;
   },
@@ -21,13 +42,39 @@ let Home = {
     const header = document.getElementById("header-content");
     const content = document.getElementById("main-content");
 
+    const albumsUl = document.getElementById('cover-list-id');
+
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
 
       } else {
 
       }
-    })
+    });
+
+    const albums = await DatabaseHelper.loadAlbums();
+
+    if (albums) {
+      albums.forEach(async function(album) {
+        console.log(album.coverId);
+        const coverImgUrl = await DatabaseHelper.getAlbumImageById(album.coverId);
+        let li = document.createElement('LI');
+        li.className = 'cover-list-item';
+        li.innerHTML = `
+            <div class="cover-div">
+              <a href="#">
+                <img class="cover-image" src=${coverImgUrl}>
+                <div class="play-image-div">
+                  <img class="play-image" src="../assets/images/play_image.png"/>
+                </div>
+              </a>
+            </div>
+            <a class="section-album-text" href="">${album.name}</a>
+            <p class="section-author-text" href="">${album.author}</p>
+        `;
+        albumsUl.appendChild(li);
+      });
+    }
 
   }
 }

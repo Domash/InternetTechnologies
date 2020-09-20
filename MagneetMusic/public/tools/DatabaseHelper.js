@@ -2,6 +2,18 @@ export async function loadSongs() {
 
 }
 
+export async function loadAlbums() {
+  const snapshot = await firebase.database().ref('/albums').once('value');
+  return snapshot.val();
+}
+
+export async function getAlbumImageById(id) {
+  let storageReference = firebase.storage().ref();
+  const imageReference = storageReference.child('albumsCovers/' + id + '.jpg');
+  const url = await imageReference.getDownloadURL();
+  return url;
+}
+
 export async function loadArtists() {
   
 }
