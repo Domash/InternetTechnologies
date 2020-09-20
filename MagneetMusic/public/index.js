@@ -1,9 +1,10 @@
 "use strict";
 
-import LoginPage from './views/pages/LoginPage.js';
-import RegisterPage from './views/pages/RegisterPage.js';
 import Home from './views/pages/Home.js'
 import Error404 from './views/pages/Error404.js';
+import LoginPage from './views/pages/LoginPage.js';
+import RegisterPage from './views/pages/RegisterPage.js';
+import AlbumPage from './views/pages/AlbumPage.js';
 
 import Header from './views/components/Header.js';
 
@@ -12,7 +13,8 @@ import Utils from './tools/Utils.js';
 const routes = {
   '/': Home,
   '/signin': LoginPage,
-  '/signup': RegisterPage
+  '/signup': RegisterPage,
+  '/album/:id': AlbumPage
 }
 
 const router = async () => {

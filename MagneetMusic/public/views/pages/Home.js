@@ -17,18 +17,6 @@ let Home = {
       <h3 class="section-title">Albums</h3>
       <div class="cover-section-div">
         <ul id="cover-list-id" class="cover-list">
-          <li class="cover-list-item">
-            <div class="cover-div">
-              <a href="#">
-                <img class="cover-image" src="../assets/images/cover-image.png">
-                <div class="play-image-div">
-                  <img class="play-image" src="../assets/images/play_image.png"/>
-                </div>
-              </a>
-            </div>
-            <a class="section-album-text" href="">Album name</a>
-            <p class="section-author-text" href="">Author name</p>
-          </li>
         </ul>
         </div>
       </section> 
@@ -69,8 +57,8 @@ let Home = {
                 </div>
               </a>
             </div>
-            <a class="section-album-text" href="">${album.name}</a>
-            <p class="section-author-text" href="">${album.author}</p>
+            <a class="section-album-text" href="/#/album/${album.coverId}">${album.name}</a>
+            <p class="section-author-text">${album.author}</p>
         `;
         albumsUl.appendChild(li);
       });
