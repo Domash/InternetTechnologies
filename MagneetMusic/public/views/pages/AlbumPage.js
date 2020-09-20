@@ -7,7 +7,7 @@ let AlbumPage = {
       <section class="album-page-section">
         <div class="logo-div">
           <div class="top-logo-div">
-            <img class="logo-image" src="../assets/images/background.png">
+            <img id="logo-img-id" class="logo-image" src="../assets/images/background.png">
           </div>
           <div class="bottom-logo-div">
             <h3 id="album-name-id" class="text-album-name">Album</h3>
@@ -30,6 +30,7 @@ let AlbumPage = {
     let albumId = decodeURIComponent(request.id);
     albumId--;
 
+    const logoTag = document.getElementById('logo-img-id');
     const albumNameTag = document.getElementById('album-name-id');
     const artistNameTag = document.getElementById('artist-name-id');
     const songsListTag = document.getElementById('songs-list-id');
@@ -45,6 +46,7 @@ let AlbumPage = {
 
       const coverImgUrl = await DatabaseHelper.getAlbumImageById(album.coverId);
 
+      logoTag.src = coverImgUrl;
       for (const songId of songs) {
         let songSnaphot = await firebase.database().ref('/songs/' + songId).once('value');
         let song = songSnaphot.val();
@@ -54,6 +56,9 @@ let AlbumPage = {
         li.innerHTML = `
           <div class="track-div">
             <div class="track-cover-div">
+            <div class="play-image-div">
+              <img class="play-image-track" src="../../images/play_image.png"/>
+            </div>
               <img class="track-cover-image" src=${coverImgUrl}>
             </div>
             <p class="track-number">${song.mp3Id}</p>
@@ -66,9 +71,13 @@ let AlbumPage = {
 
         songsListTag.appendChild(li);
       }
+    });
 
-
-    })
+    songsListTag.addEventListener("click", async function(e) {
+      if (e.target && e.target.nodeName == "IMG") {
+        console.log("PLAY");
+      }
+    });
 
 
   }

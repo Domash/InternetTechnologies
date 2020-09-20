@@ -53,7 +53,7 @@ let Home = {
               <a href="#">
                 <img class="cover-image" src=${coverImgUrl}>
                 <div class="play-image-div">
-                  <img class="play-image" src="../assets/images/play_image.png"/>
+                  <img class="play-image" src="../../images/play_image.png"/>
                 </div>
               </a>
             </div>
