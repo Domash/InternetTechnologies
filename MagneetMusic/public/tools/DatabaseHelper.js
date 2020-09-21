@@ -30,6 +30,9 @@ export async function loadArtistCover(id) {
 
 }
 
-export async function loadSongFile(id) {
-  
+export async function loadSongFileById(id) {
+  let storageReference = firebase.storage().ref();
+  const songReference = storageReference.child('songsFiles/' + id + '.mp3');
+  const url = await songReference.getDownloadURL();
+  return url;
 }
