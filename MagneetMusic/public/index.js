@@ -8,6 +8,7 @@ import AlbumPage from './views/pages/AlbumPage.js';
 import LibraryPage from './views/pages/LibraryPage.js';
 
 import Header from './views/components/Header.js';
+import Player from './views/components/Player.js';
 
 import Utils from './tools/Utils.js';
 
@@ -22,12 +23,16 @@ const routes = {
 const router = async () => {
   const header = null || document.getElementById('header-content');
   const main_content = null || document.getElementById('main-content');
+  const player_content = null || document.getElementById('player-content');
 
   header.innerHTML = await Header.render();
   await Header.after_render();
 
   main_content.innerHTML = await Home.render();
   await Home.after_render();
+
+  player_content.innerHTML = await Player.render();
+  await Player.after_render();
 
   let request = Utils.parseRequestURL()
 
