@@ -40,7 +40,10 @@ let RegisterPage = {
         const auth = firebase.auth();
         const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
 
-        promise.then(() => {
+        promise.then(async function (user) {
+
+          // let lastuser
+
           window.location.href = '/#/';
         }).catch(e => alert(e.message));
       }

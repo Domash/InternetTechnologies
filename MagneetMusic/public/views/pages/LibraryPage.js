@@ -16,33 +16,38 @@ let LibraryPage = {
   after_render: async () => {
     const songsListTag = document.getElementById('songs-list-id');
 
-    let snapshot = await firebase.database().ref('/songs');
-    snapshot.on("value", async function(snapshot) {
-      let songs = snapshot.val();
+    let songs = await DatabaseHelper.loadSongs();
 
-      var index = 0;
-      for (let song of songs) {
-        index++;
-        const coverImgUrl = await DatabaseHelper.getAlbumImageById(song.coverId);
-        let li = document.createElement('LI');
-        li.className = 'album-list-li';
-        li.innerHTML = `
-          <div class="track-div">
-            <div class="track-cover-div">
-            <div class="play-image-div">
-              <img class="play-image-track" src="../../images/play_image.png"/>
-            </div>
-              <img class="track-cover-image" src=${coverImgUrl}>
-            </div>
-            <p class="track-number">${index}.</p>
-            <p class="track-name">${song.author + "/" + song.name}</p>
-          </div>
-          <div class="track-len-div">
-            <p class="track-len-text">3.00</p>
-          </div>
-        `;
+    var indexInPlaylist = 0;
+    for (let song of songs) {
+      let index = song.mp3Id - 1; 
 
-        songsListTag.appendChild(li);
+      indexInPlaylist++;
+      const coverImgUrl = await DatabaseHelper.getAlbumImageById(song.coverId);
+      let li = document.createElement('LI');
+      li.className = 'album-list-li';
+      li.innerHTML = `
+        <div class="track-div">
+          <div class="track-cover-div">
+          <div class="play-image-div">
+            <img id ="${index}" class ="play-image-track" src="../../images/play_image.png"/>
+          </div>
+            <img id = "${index}" class="track-cover-image" src=${coverImgUrl}>
+          </div>
+          <p class="track-number">${indexInPlaylist}.</p>
+          <p class="track-name">${song.author + "/" + song.name}</p>
+        </div>
+        <div class="track-len-div">
+          <p class="track-len-text">3.00</p>
+        </div>
+      `;
+
+      songsListTag.appendChild(li);
+    }
+
+    songsListTag.addEventListener("click", async function(e) {
+      if (e.target && e.target.nodeName == "IMG") {
+        console.log(e.target.id);
       }
     });
   }

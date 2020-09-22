@@ -7,8 +7,8 @@ let Home = {
       <div class="nav-container-nav">
         <a class="nav-ref" href="/#/library">Library</a>
         <a class="nav-ref" href="#albums-title">Albums</a>
+        <a class="nav-ref" href="#artist-title">Artists</a>
         <a class="nav-ref" href="">Playlists</a>
-        <a class="nav-ref" href="">Likes</a>
         <a class="nav-ref" href="">Following</a>
       </div>
     </nav>
@@ -18,8 +18,16 @@ let Home = {
       <div class="cover-section-div">
         <ul id="cover-list-id" class="cover-list">
         </ul>
-        </div>
-      </section> 
+      </div>
+    </section> 
+
+    <section class="artists-section">
+      <h3 class="section-title" id="artist-title">Artists</h3>
+      <div class="artists-section-div">
+        <ul id="artists-list-id"class="artists-list">
+        </ul>
+      </div>
+    </section> 
     `;
     return view;
   },
@@ -29,6 +37,7 @@ let Home = {
     const content = document.getElementById("main-content");
 
     const albumsUl = document.getElementById('cover-list-id');
+    const artistsUl = document.getElementById('artists-list-id');
 
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
@@ -39,6 +48,7 @@ let Home = {
     });
 
     const albums = await DatabaseHelper.loadAlbums();
+    const artists = await DatabaseHelper.loadArtists();
 
     if (albums) {
       albums.forEach(async function(album) {
@@ -55,10 +65,29 @@ let Home = {
                 </div>
               </a>
             </div>
-            <a class="section-album-text" href="/#/album/${album.coverId}">${album.name}</a>
+            <a class="section-album-text" href="/#/album/${album.coverId - 1}">${album.name}</a>
             <p class="section-author-text">${album.author}</p>
         `;
         albumsUl.appendChild(li);
+      });
+    }
+
+    if (artists) {
+      artists.forEach(async function(artist) {
+        const coverImgUrl = await DatabaseHelper.getArtistImageById(artist.coverId);
+        let li = document.createElement('LI');
+        li.className = 'artists-list-item';
+        li.innerHTML = `
+          <div class ="artist-div">
+            <a href="#/">
+              <img class="goto-artist-image" src="${coverImgUrl}">
+              <div class="goto-artist-image-div">
+              </div>
+            </a>
+          </div>
+          <a class="section-artists-text" href="/#/artist/${artist.coverId - 1}">${artist.name}</a>
+        `;
+        artistsUl.appendChild(li);
       });
     }
 

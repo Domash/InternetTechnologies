@@ -28,7 +28,6 @@ let AlbumPage = {
     let request = Utils.parseRequestURL()
 
     let albumId = decodeURIComponent(request.id);
-    albumId--;
 
     const logoTag = document.getElementById('logo-img-id');
     const albumNameTag = document.getElementById('album-name-id');

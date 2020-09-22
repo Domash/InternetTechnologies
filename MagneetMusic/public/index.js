@@ -5,6 +5,7 @@ import Error404 from './views/pages/Error404.js';
 import LoginPage from './views/pages/LoginPage.js';
 import RegisterPage from './views/pages/RegisterPage.js';
 import AlbumPage from './views/pages/AlbumPage.js';
+import ArtistPage from './views/pages/ArtistPage.js';
 import LibraryPage from './views/pages/LibraryPage.js';
 import SearchPage from './views/pages/SearchPage.js';
 
@@ -18,6 +19,7 @@ const routes = {
   '/signin': LoginPage,
   '/signup': RegisterPage,
   '/album/:id': AlbumPage,
+  '/artist/:id': ArtistPage,
   '/library': LibraryPage,
   '/search/:id': SearchPage
 }

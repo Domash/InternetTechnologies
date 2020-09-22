@@ -10,7 +10,13 @@ let Player = {
 
         <div class="player-main-div">
           <div class="play-pause-btn">
+            <img class="play-pause-img" id="prev-id" src="images/prev.png">
+          </div>
+          <div class="play-pause-btn">
             <img class="play-pause-img" id="play-pause-id" src="images/play.png">
+          </div>
+          <div class="play-pause-btn">
+            <img class="play-pause-img" id="next-id" src="images/next.png">
           </div>
 
           <div class="controls">
