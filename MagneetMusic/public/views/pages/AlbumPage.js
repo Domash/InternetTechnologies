@@ -45,9 +45,12 @@ let AlbumPage = {
       artistNameTag.innerHTML = album.author;
 
       const coverImgUrl = await DatabaseHelper.getAlbumImageById(album.coverId);
-
       logoTag.src = coverImgUrl;
+
+      var index = 0;
       for (const songId of songs) {
+        index++;
+
         let songSnaphot = await firebase.database().ref('/songs/' + songId).once('value');
         let song = songSnaphot.val();
 
@@ -61,7 +64,7 @@ let AlbumPage = {
             </div>
               <img class="track-cover-image" src=${coverImgUrl}>
             </div>
-            <p class="track-number">${song.mp3Id}</p>
+            <p class="track-number">${index}.</p>
             <p class="track-name">${song.name}</p>
           </div>
           <div class="track-len-div">

@@ -5,7 +5,7 @@ let Home = {
     let view = `
     <nav class="nav-container">
       <div class="nav-container-nav">
-        <a class="nav-ref" href="">Overview</a>
+        <a class="nav-ref" href="/#/library">Library</a>
         <a class="nav-ref" href="#albums-title">Albums</a>
         <a class="nav-ref" href="">Playlists</a>
         <a class="nav-ref" href="">Likes</a>

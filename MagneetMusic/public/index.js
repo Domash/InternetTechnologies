@@ -6,6 +6,7 @@ import LoginPage from './views/pages/LoginPage.js';
 import RegisterPage from './views/pages/RegisterPage.js';
 import AlbumPage from './views/pages/AlbumPage.js';
 import LibraryPage from './views/pages/LibraryPage.js';
+import SearchPage from './views/pages/SearchPage.js';
 
 import Header from './views/components/Header.js';
 import Player from './views/components/Player.js';
@@ -17,7 +18,8 @@ const routes = {
   '/signin': LoginPage,
   '/signup': RegisterPage,
   '/album/:id': AlbumPage,
-  '/library': LibraryPage
+  '/library': LibraryPage,
+  '/search/:id': SearchPage
 }
 
 const router = async () => {

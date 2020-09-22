@@ -149,7 +149,12 @@ body {
   padding-right: 10px;
   width: 70%;
   font-family: monospace;
+  color: #f020cd;
   border-radius: 3px;
+}
+
+.h-nav-container-left input[type=text]::placeholder {
+  color: #555;
 }
 
 .h-nav-container-left input[type=text]:focus {

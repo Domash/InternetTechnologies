@@ -9,10 +9,10 @@ let Player = {
         </div>
 
         <div class="player-main-div">
-          <div class="play-pause-btn">  
+          <div class="play-pause-btn">
             <img class="play-pause-img" id="play-pause-id" src="images/play.png">
           </div>
- 
+
           <div class="controls">
             <div class="slider" id="slider-id" data-direction="horizontal">
               <div class="progress" id="progress-id">
@@ -45,6 +45,8 @@ let Player = {
     playPauseImgTag.src = "images/play.png";
 
     let isPlayerActive = false;
+
+    let songsId = []
 
     await getSong();
 

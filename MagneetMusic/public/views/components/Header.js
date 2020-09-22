@@ -4,7 +4,7 @@ let Header = {
     <header class="header">
       <div class="h-nav-container-left">
         <a class="h-nav-ref" href="/#/">Home</a>
-        <input type="text" placeholder="Search...">
+        <input id="search-id" type="text" placeholder="Search...">
       </div>
       <div id="h-nav-right" class="h-nav-container-right">
         <a id="log-out" class="div-header-buttons"><p>Logout</p></a>
@@ -36,13 +36,13 @@ let Header = {
       }
     });
 
-    // const search = document.getElementById();
-    // search.addEventListener("keyup", function(event) {
-    //   if (event.keyCode === 13) {
-    //     event.preventDefault();
-    //     document.location = "";
-    //   }
-    // });
+    const search = document.getElementById("search-id");
+    search.addEventListener("keyup", function(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        document.location = "/#/search/" + search.value;;
+      }
+    });
 
   }
 }
