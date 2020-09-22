@@ -1,3 +1,5 @@
+import * as DatabaseHelper from '../../tools/DatabaseHelper.js'
+
 let RegisterPage = {
   render: async () => {
     let view = `
@@ -41,8 +43,11 @@ let RegisterPage = {
         const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
 
         promise.then(async function (user) {
-
-          // let lastuser
+          let usersCnt = await DatabaseHelper.getUsersCount();
+          await firebase.database().ref("/users_music_queue/" + usersCnt).set({
+            user: email.value
+          });
+          await DatabaseHelper.setUsersCount(usersCnt + 1);
 
           window.location.href = '/#/';
         }).catch(e => alert(e.message));

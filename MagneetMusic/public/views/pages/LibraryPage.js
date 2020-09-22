@@ -20,7 +20,7 @@ let LibraryPage = {
 
     var indexInPlaylist = 0;
     for (let song of songs) {
-      let index = song.mp3Id - 1; 
+      let index = song.mp3Id; 
 
       indexInPlaylist++;
       const coverImgUrl = await DatabaseHelper.getAlbumImageById(song.coverId);
@@ -48,6 +48,11 @@ let LibraryPage = {
     songsListTag.addEventListener("click", async function(e) {
       if (e.target && e.target.nodeName == "IMG") {
         console.log(e.target.id);
+        if(firebase.auth().currentUser) {
+          DatabaseHelper.updateUserMusicQueue(firebase.auth().currentUser.email, [e.target.id]);
+        } else {
+          alert("Login first.");
+        }
       }
     });
   }

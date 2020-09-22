@@ -52,7 +52,6 @@ let Home = {
 
     if (albums) {
       albums.forEach(async function(album) {
-        console.log(album.coverId);
         const coverImgUrl = await DatabaseHelper.getAlbumImageById(album.coverId);
         let li = document.createElement('LI');
         li.className = 'cover-list-item';

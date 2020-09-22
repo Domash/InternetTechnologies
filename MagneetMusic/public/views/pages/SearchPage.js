@@ -27,8 +27,8 @@ let SearchPage = {
     let songs = await DatabaseHelper.loadSongs();
 
     var indexInPlaylist = 0;
-    for (let song of songs) {
-      let index = song.mp3Id - 1; 
+    for (const song of songs) {
+      let index = song.mp3Id; 
 
       let match = song.name.toLowerCase().includes(query.toLocaleLowerCase()) || 
                   song.author.toLowerCase().includes(query.toLocaleLowerCase());           
@@ -60,6 +60,11 @@ let SearchPage = {
     songsListTag.addEventListener("click", async function(e) {
       if (e.target && e.target.nodeName == "IMG") {
         console.log(e.target.id);
+        if(firebase.auth().currentUser) {
+          DatabaseHelper.updateUserMusicQueue(firebase.auth().currentUser.email, [e.target.id]);
+        } else {
+          alert("Login first.");
+        }
       }
     });
 

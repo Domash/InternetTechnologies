@@ -59,9 +59,9 @@ let AlbumPage = {
           <div class="track-div">
             <div class="track-cover-div">
             <div class="play-image-div">
-              <img class="play-image-track" src="../../images/play_image.png"/>
+              <img id ="${songId + 1}" class="play-image-track" src="../../images/play_image.png"/>
             </div>
-              <img class="track-cover-image" src=${coverImgUrl}>
+              <img id ="${songId + 1}" class="track-cover-image" src=${coverImgUrl}>
             </div>
             <p class="track-number">${index}.</p>
             <p class="track-name">${song.name}</p>
@@ -77,7 +77,12 @@ let AlbumPage = {
 
     songsListTag.addEventListener("click", async function(e) {
       if (e.target && e.target.nodeName == "IMG") {
-        console.log("PLAY");
+        console.log(e.target.id);
+        if(firebase.auth().currentUser) {
+          DatabaseHelper.updateUserMusicQueue(firebase.auth().currentUser.email, [e.target.id]);
+        } else {
+          alert("Login first.");
+        }
       }
     });
 

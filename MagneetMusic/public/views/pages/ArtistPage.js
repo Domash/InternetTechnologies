@@ -69,6 +69,17 @@ let ArtistPage = {
       }
     }
 
+    songsListTag.addEventListener("click", async function(e) {
+      if (e.target && e.target.nodeName == "IMG") {
+        console.log(e.target.id);
+        if(firebase.auth().currentUser) {
+          DatabaseHelper.updateUserMusicQueue(firebase.auth().currentUser.email, [e.target.id]);
+        } else {
+          alert("Login first.");
+        }
+      }
+    });
+
   }
 }
 
