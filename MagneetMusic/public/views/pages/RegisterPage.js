@@ -28,6 +28,8 @@ let RegisterPage = {
     const login_button = document.getElementById("regin_button");
 
     login_button.addEventListener ("click", () => {
+      event.preventDefault();
+
       const email = document.getElementById("email_field");
       const password = document.getElementById("password_field");
       const password2 = document.getElementById("password_field2");
@@ -39,7 +41,7 @@ let RegisterPage = {
         const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
 
         promise.then(() => {
-          window.location.href = "/#/";
+          window.location.href = '/#/';
         }).catch(e => alert(e.message));
       }
 

@@ -45,8 +45,30 @@ const router = async () => {
   await page.after_render();
 }
 
+const routerForContinueslyPlaying = async () => {
+  const header = null || document.getElementById('header-content');
+  const main_content = null || document.getElementById('main-content');
+  const player_content = null || document.getElementById('player-content');
+
+  header.innerHTML = await Header.render();
+  await Header.after_render();
+
+  main_content.innerHTML = await Home.render();
+  await Home.after_render();
+
+  let request = Utils.parseRequestURL()
+
+  let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '')
+  console.log(parsedURL)
+
+  let page = routes[parsedURL] ? routes[parsedURL] : Error404
+  main_content.innerHTML = await page.render();
+  
+  await page.after_render();
+}
+
 // Listen on hash change:
-window.addEventListener('hashchange', router);
+window.addEventListener('hashchange', routerForContinueslyPlaying);
 
 // Listen on page load:
 window.addEventListener('load', router);

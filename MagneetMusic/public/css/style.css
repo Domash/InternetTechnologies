@@ -203,7 +203,7 @@ a {
 #main-content {
   display: flex;
   flex-direction: column;
-	margin-bottom: 60px;
+	margin-bottom: 80px;
 }
 
 .albums-section {
@@ -618,7 +618,7 @@ a {
   border-radius: inherit;
   position: absolute;
   pointer-events: none;
-  width: 0;
+  width: 0px;
   height: 100%;
 }
 

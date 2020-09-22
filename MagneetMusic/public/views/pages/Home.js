@@ -6,7 +6,7 @@ let Home = {
     <nav class="nav-container">
       <div class="nav-container-nav">
         <a class="nav-ref" href="">Overview</a>
-        <a class="nav-ref" href="">Albums</a>
+        <a class="nav-ref" href="#albums-title">Albums</a>
         <a class="nav-ref" href="">Playlists</a>
         <a class="nav-ref" href="">Likes</a>
         <a class="nav-ref" href="">Following</a>
@@ -14,7 +14,7 @@ let Home = {
     </nav>
     
     <section class="albums-section">
-      <h3 class="section-title">Albums</h3>
+      <h3 class="section-title" id="albums-title">Albums</h3>
       <div class="cover-section-div">
         <ul id="cover-list-id" class="cover-list">
         </ul>
@@ -25,8 +25,6 @@ let Home = {
   },
   after_render: async () => {
 
-    console.log("Hello");
-
     const header = document.getElementById("header-content");
     const content = document.getElementById("main-content");
 
@@ -36,7 +34,7 @@ let Home = {
       if (user) {
 
       } else {
-
+        
       }
     });
 
@@ -50,7 +48,7 @@ let Home = {
         li.className = 'cover-list-item';
         li.innerHTML = `
             <div class="cover-div">
-              <a href="#">
+              <a href="#/">
                 <img class="cover-image" src=${coverImgUrl}>
                 <div class="play-image-div">
                   <img class="play-image" src="../../images/play_image.png"/>

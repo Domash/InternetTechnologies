@@ -26,6 +26,7 @@ let LoginPage = {
     const login_button = document.getElementById("login_button");
 
     login_button.addEventListener ("click", () => {
+      event.preventDefault();
       const email = document.getElementById("email_field");
       const password = document.getElementById("password_field");
 
@@ -33,10 +34,9 @@ let LoginPage = {
       const promise = auth.signInWithEmailAndPassword(email.value, password.value);
 
       promise.then(function(user) {
-        window.location.href = "/#/";
+        window.location.href = '/#/';
       }).catch(e => alert(e.message));
 
-      // firebase part
     });
   }
 }

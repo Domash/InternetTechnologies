@@ -3,13 +3,13 @@ let Header = {
     return `
     <header class="header">
       <div class="h-nav-container-left">
-        <a class="h-nav-ref" href="">Home</a>
+        <a class="h-nav-ref" href="/#/">Home</a>
         <input type="text" placeholder="Search...">
       </div>
       <div id="h-nav-right" class="h-nav-container-right">
         <a id="log-out" class="div-header-buttons"><p>Logout</p></a>
-        <a id="log-in" class="div-header-buttons" href="?#/signin"><p>Login</p></a>
-        <a id="reg-in" class="div-header-buttons" href="?#/signup"><p>Registration</p></a>
+        <a id="log-in" class="div-header-buttons" href="/#/signin"><p>Login</p></a>
+        <a id="reg-in" class="div-header-buttons" href="/#/signup"><p>Registration</p></a>
       </div>
     
       </header>
