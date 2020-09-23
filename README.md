@@ -8,3 +8,5 @@
  - [Registration](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/registration.html)
  - [Authorization](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/authorization.html)
  - [Almub Page](https://domash.github.io/InternetTechnologies/MagneetMusic/src/views/albumPage.html)
+
+ -[HOST](https://magneetmusic-b4702.web.app/#/)
