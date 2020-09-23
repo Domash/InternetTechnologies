@@ -92,10 +92,8 @@ let Home = {
 
     albumsUl.addEventListener('click', async function(e) {
       if (e.target && e.target.nodeName == "IMG") {
-        console.log(e.target.id);
         if(firebase.auth().currentUser) {
           let songs = await DatabaseHelper.getAlmubSongs(e.target.id);
-          console.log(songs);
           DatabaseHelper.updateUserMusicQueue(firebase.auth().currentUser.email, songs);
         } else {
           alert("Login first.");

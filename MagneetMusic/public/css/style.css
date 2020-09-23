@@ -70,6 +70,10 @@ body {
 	font-size: 15px;
 }
 
+.div-help-auth-text input[type=email]::placeholder, input[type=password]::placeholder{
+  color: #555;
+}
+
 .div-button-auth {
 	display: flex;
 	justify-content: center;

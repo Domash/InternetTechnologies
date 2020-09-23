@@ -77,7 +77,6 @@ export async function getAlmubSongs(id) {
   let mp3list = []
   for (const songId of songs) {
     let song = await getSongById(songId);
-    console.log(song);
     mp3list.push(song.mp3Id);
   }
 

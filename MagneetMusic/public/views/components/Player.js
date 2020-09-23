@@ -83,7 +83,7 @@ let Player = {
               const queueSnapshot = await firebase.database().ref('/users_music_queue/' + index + '/queue').once('value');
               let songs = queueSnapshot.val();
 
-              console.log(songs);
+              //console.log(songs);
 
               if (isFirstRun && songs == null) {
                 playerSection.classList.add("hidden");
