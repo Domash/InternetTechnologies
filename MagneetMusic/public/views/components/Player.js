@@ -117,7 +117,7 @@ let Player = {
     async function loadSong() {
       let songId = musicQueue[queueIndex];
       const song = await DatabaseHelper.getSongById(songId - 1);
-      console.log(song);
+      //console.log(song);
       player.src = await DatabaseHelper.loadSongFileById(songId);
       playerCoverImgTag.src = await DatabaseHelper.getAlbumImageById(song.coverId);
     }

@@ -8,8 +8,8 @@ let Home = {
         <a class="nav-ref" href="/#/library">Library</a>
         <a class="nav-ref" href="#albums-title">Albums</a>
         <a class="nav-ref" href="#artist-title">Artists</a>
-        <a class="nav-ref" href="">Playlists</a>
-        <a class="nav-ref" href="">Following</a>
+        <a class="nav-ref" href="/#/">Playlists</a>
+        <a class="nav-ref" href="/#/">Upload Track</a>
       </div>
     </nav>
     
@@ -58,9 +58,9 @@ let Home = {
         li.innerHTML = `
             <div class="cover-div">
               <a href="#/">
-                <img class="cover-image" src=${coverImgUrl}>
+                <img id ="${album.coverId - 1}" class="cover-image" src=${coverImgUrl}>
                 <div class="play-image-div">
-                  <img class="play-image" src="../../images/play_image.png"/>
+                  <img id ="${album.coverId - 1}" class="play-image" src="../../images/play_image.png"/>
                 </div>
               </a>
             </div>
@@ -89,6 +89,19 @@ let Home = {
         artistsUl.appendChild(li);
       });
     }
+
+    albumsUl.addEventListener('click', async function(e) {
+      if (e.target && e.target.nodeName == "IMG") {
+        console.log(e.target.id);
+        if(firebase.auth().currentUser) {
+          let songs = await DatabaseHelper.getAlmubSongs(e.target.id);
+          console.log(songs);
+          DatabaseHelper.updateUserMusicQueue(firebase.auth().currentUser.email, songs);
+        } else {
+          alert("Login first.");
+        }
+      }
+    });
 
   }
 }

@@ -70,6 +70,20 @@ export async function setUsersCount(cnt) {
   await firebase.database().ref('/users_cnt').set(cnt);
 }
 
+export async function getAlmubSongs(id) {
+  const snapshot = await firebase.database().ref('/albums/' + id + '/songs').once('value');
+  const songs = snapshot.val();
+  
+  let mp3list = []
+  for (const songId of songs) {
+    let song = await getSongById(songId);
+    console.log(song);
+    mp3list.push(song.mp3Id);
+  }
+
+  return mp3list;
+}
+
 export async function updateUserMusicQueue(user, newMusic) {
   
   const snapshot = await firebase.database().ref('/users_music_queue').once('value');
