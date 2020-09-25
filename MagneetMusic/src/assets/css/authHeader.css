@@ -1,0 +1,59 @@
+.header-div-flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+#logo-size-header {
+	height: 60px;
+	width: 650px;
+}
+
+.header-ref-button {
+	text-decoration: none;
+}
+
+#logo-div-flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80px;
+}
+
+#block-auth-buttons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  padding-right: auto;
+}
+
+.div-header-buttons {
+	display: flex;
+	justify-content: center;
+	margin: 10px 10px;
+	padding: 10px 30px;
+	border-radius: 5px;
+	border: 4px solid;
+	font-family: monospace;
+	font-size: 14px;
+	text-transform: uppercase;
+	background: none;
+	outline: none;
+	cursor: pointer;
+	-webkit-transition: all .5s;
+	transition: all .5s;
+	color: #f020cd;
+
+	background-size: 0% 100%;
+} 
+
+@media only screen and (max-width: 1024px) {
+	#logo-size-header {
+		height: 40px;
+		width: 90%;
+	}
+
+	.header-div-flex {
+		flex-direction: column;
+	}
+}

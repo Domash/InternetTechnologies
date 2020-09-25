@@ -1,0 +1,112 @@
+.album-page-section {
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-logo-div {
+  width: 15em;
+  height: 15em;
+}
+
+.bottom-logo-div {
+  /* background: yellow */
+}
+
+.logo-image {
+  width: 15em;
+  height: 15em;
+}
+
+.text-album-name {
+  font-family: monospace;
+  font-size: 2em;
+  color: orchid;
+  padding-top: 1%;
+  text-decoration: none;
+}
+
+.text-album-description{
+  font-family: monospace;
+  font-size: 1.5em;
+  color: gray;
+}
+
+.album-list-div {
+  display: flex;
+  justify-content: flex-start;
+  /* background: greenyellow */
+}
+
+.album-list-ul {
+  padding-top: 10px; 
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  /* background: green */
+}
+
+.album-list-li {
+  /* transition: .25s ease; */
+  padding: 5px;
+  padding-bottom: 2px;
+  margin: 5px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-style: groove;
+  border-width: 1px;
+  border-color: black;
+}
+
+.album-list-li:hover {
+  box-shadow: 5px 3px 3px orchid;
+}
+
+.track-div {
+  display: flex;
+  align-self: start;
+  flex-direction: row;
+}
+
+.track-cover-div {
+  position: relative;
+}
+
+.track-cover-image {
+  height: 3em;
+  width: 3em;
+}
+
+.track-number {
+  align-self: center;
+  padding-left: 15px;
+  font-size: 1.2em;
+  font-family: monospace;
+}
+
+.track-name {
+  align-self: center;
+  padding-left: 5px;
+  font-size: 1.2em;
+  font-family: monospace;
+
+}
+
+.track-len-div {
+  padding-right: 15px;
+  align-self: center;
+  font-family: monospace;
+}
+
+.track-len-text {
+  font-size: 1.2em;
+  font-family: monospace;
+  color: gray;
+}
+

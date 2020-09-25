@@ -1,0 +1,36 @@
+.section-album-text {
+  font-family: monospace;
+  font-size: 1.2em;
+  color: orchid;
+  text-decoration: none;
+}
+
+.section-album-text:hover {
+  opacity: 0.6;
+}
+
+.section-author-text {
+  font-family: monospace;
+  font-size: 1em;
+  color: gray;
+}
+
+.section-artists-text {
+  font-family: monospace;
+  font-size: 1.2em;
+  color: orchid;
+  text-align: center;
+  text-decoration: none;
+
+}
+
+.section-artists-text:hover {
+  opacity: 0.6;
+}
+
+.section-title {
+  font-size: 1.7em;
+  font-family: monospace;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}

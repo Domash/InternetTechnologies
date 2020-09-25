@@ -1,0 +1,51 @@
+#main-container {
+	background-color: whitesmoke;
+	margin-bottom: 60px;
+}
+
+.albums-section {
+	margin: 2%; 
+	padding: 15px;
+	padding-left: 15px;
+	margin-bottom: 1%; 
+	min-height: 300px;
+	background-color: whitesmoke;
+}
+
+.playlists-section {
+	margin: 2%; 
+	padding: 15px;
+	padding-left: 15px;
+	margin-bottom: 1%; 
+	min-height: 300px;
+	background-color: whitesmoke;
+}
+
+.artists-section {
+	margin: 2%; 
+	padding: 15px;
+	padding-left: 15px;
+	margin-bottom: 1%; 
+	min-height: 300px;
+	background-color: whitesmoke;
+}
+
+@media only screen and (max-width: 1024px) {
+	.albums-section {
+		margin: 2%;
+		padding: 0px;
+		min-height: 20px;
+	}
+
+	.playlists-section {
+		margin: 2%;
+		padding: 0px;
+		min-height: 20px;
+	}
+
+	.artists-section {
+		margin: 2%;
+		padding: 0px;
+		min-height: 20px;
+	}
+}
